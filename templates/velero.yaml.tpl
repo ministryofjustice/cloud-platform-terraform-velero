@@ -2,6 +2,13 @@
 ## Configuration settings that directly affect the Velero deployment YAML.
 ##
 
+# Details of the container image to use in the Velero deployment & daemonset (if
+# enabling restic). Required.
+# image:
+#   repository: gcr.io/heptio-images/velero
+#   tag: v1.1.0
+#   pullPolicy: IfNotPresent
+
 podAnnotations:
   iam.amazonaws.com/role: ${iam_role}
 
@@ -34,7 +41,7 @@ configuration:
   # Parameters for the `default` BackupStorageLocation. See
   # https://velero.io/docs/v1.0.0/api-types/backupstoragelocation/
   backupStorageLocation:
-    name: aws
+    name: default
     # Bucket to store backups in. Required.
     bucket: cloud-platform-velero-backups
     # Prefix within bucket under which to store backups. Optional.
@@ -98,7 +105,11 @@ schedules:
   allnamespacebackup:
     schedule: "0 0/3 * * *"
     template:
-    ttl: "240h"
+      ttl: "240h"
+  starterpackbackup:
+    schedule: "5 * * * *"
+    template:
+      ttl: "3h"
 
 configMaps: {}
 

@@ -93,9 +93,9 @@ resource "aws_iam_role_policy" "velero" {
 resource "helm_release" "velero" {
   name       = "velero"
   namespace  = "velero"
-  repository = "vmware-tanzu"
+  repository = "stable"
   chart      = "velero"
-  version    = "2.9.15"
+  version    = "2.7.4"
 
   depends_on = [
     kubernetes_namespace.velero,
