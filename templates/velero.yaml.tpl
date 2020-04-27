@@ -41,7 +41,7 @@ configuration:
   # Parameters for the `default` BackupStorageLocation. See
   # https://velero.io/docs/v1.0.0/api-types/backupstoragelocation/
   backupStorageLocation:
-    name: default
+    name: aws
     # Bucket to store backups in. Required.
     bucket: cloud-platform-velero-backups
     # Prefix within bucket under which to store backups. Optional.
@@ -106,10 +106,6 @@ schedules:
     schedule: "0 0/3 * * *"
     template:
       ttl: "240h"
-  starterpackbackup:
-    schedule: "5 * * * *"
-    template:
-      ttl: "3h"
 
 configMaps: {}
 
