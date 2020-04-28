@@ -2,7 +2,7 @@
 
 [![Releases](https://img.shields.io/github/release/ministryofjustice/cloud-platform-terraform-template/all.svg?style=flat-square)](https://github.com/ministryofjustice/cloud-platform-terraform-template/releases)
 
-Terraform module that deploy clodu-platform velero which manages the backup and restore of all resources of the cluster
+Terraform module that deploy cloud-platform velero which manages the backup and restore of all resources of the cluster
 
 ## Usage
 
