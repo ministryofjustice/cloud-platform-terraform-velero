@@ -9,8 +9,20 @@
 #   tag: v1.1.0
 #   pullPolicy: IfNotPresent
 
+%{ if eks == false ~}
 podAnnotations:
-  iam.amazonaws.com/role: ${iam_role}
+  iam.amazonaws.com/role: ${velero_iam_role}
+%{ endif ~}
+
+%{ if eks ~}
+serviceAccount:
+  server:
+    create: true
+    annotations: 
+      eks.amazonaws.com/role-arn: "${eks_service_account}"
+securityContext:
+  fsGroup: 1337
+%{ endif ~}
 
 initContainers:
   - name: velero-plugin-for-aws
@@ -41,7 +53,13 @@ configuration:
   # Parameters for the `default` BackupStorageLocation. See
   # https://velero.io/docs/v1.0.0/api-types/backupstoragelocation/
   backupStorageLocation:
+%{ if eks == false ~}
+    name: default
+%{ endif ~}
+%{ if eks ~}
     name: aws
+%{ endif ~}
+  
     # Bucket to store backups in. Required.
     bucket: cloud-platform-velero-backups
     # Prefix within bucket under which to store backups. Optional.
@@ -56,7 +74,12 @@ configuration:
     #  publicUrl:
 
   volumeSnapshotLocation:
+%{ if eks == false ~}
+    name: default
+%{ endif ~}
+%{ if eks ~}
     name: aws
+%{ endif ~}
     config:
       region: eu-west-2
   #    apitimeout:
@@ -78,11 +101,11 @@ configuration:
 rbac:
   create: true
 
-# Information about the Kubernetes service account Velero uses.
-serviceAccount:
-  server:
-    create: true
-    name:
+# # Information about the Kubernetes service account Velero uses.
+# serviceAccount:
+#   server:
+#     create: true
+#     name:
 
 credentials:
   useSecret: false
@@ -105,7 +128,7 @@ schedules:
   allnamespacebackup:
     schedule: "0 0/3 * * *"
     template:
-      ttl: "240h"
+      ttl: "720h"
 
 configMaps: {}
 
