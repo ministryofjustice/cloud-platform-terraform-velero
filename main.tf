@@ -18,10 +18,15 @@ resource "kubernetes_namespace" "velero" {
   }
 }
 
+data "helm_repository" "vmware_tanzu" {
+  name = "vmware-tanzu"
+  url  = "https://vmware-tanzu.github.io/helm-charts"
+}
+
 resource "helm_release" "velero" {
   name       = "velero"
   namespace  = kubernetes_namespace.velero.id
-  repository = "vmware-tanzu"
+  repository = data.helm_repository.vmware_tanzu.metadata[0].name
   chart      = "velero"
     version    = "2.9.15"
 
