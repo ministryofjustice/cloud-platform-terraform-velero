@@ -53,12 +53,7 @@ configuration:
   # Parameters for the `default` BackupStorageLocation. See
   # https://velero.io/docs/v1.0.0/api-types/backupstoragelocation/
   backupStorageLocation:
-%{ if eks == false ~}
     name: default
-%{ endif ~}
-%{ if eks ~}
-    name: aws
-%{ endif ~}
   
     # Bucket to store backups in. Required.
     bucket: cloud-platform-velero-backups
@@ -74,12 +69,7 @@ configuration:
     #  publicUrl:
 
   volumeSnapshotLocation:
-%{ if eks == false ~}
     name: default
-%{ endif ~}
-%{ if eks ~}
-    name: aws
-%{ endif ~}
     config:
       region: eu-west-2
   #    apitimeout:
