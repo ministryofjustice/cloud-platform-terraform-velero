@@ -10,10 +10,11 @@ resource "kubernetes_namespace" "velero" {
 
     annotations = {
       "cloud-platform.justice.gov.uk/application"   = "Velero"
-      "cloud-platform.justice.gov.uk/business-unit" = "cloud-platform"
+      "cloud-platform.justice.gov.uk/business-unit" = "Platforms"
       "cloud-platform.justice.gov.uk/owner"         = "Cloud Platform: platforms@digital.justice.gov.uk"
       "cloud-platform.justice.gov.uk/source-code"   = "https://github.com/ministryofjustice/cloud-platform-infrastructure"
       "iam.amazonaws.com/permitted"                 = var.eks ? "" : aws_iam_role.velero.0.name
+      "cloud-platform-out-of-hours-alert"           = "true"
     }
   }
 }
