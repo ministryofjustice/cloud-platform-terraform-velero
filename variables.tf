@@ -12,6 +12,15 @@ variable "cluster_domain_name" {
   description = "The cluster domain used for iam_assumable_role_admin role name"
 }
 
+variable "dockerhub_username" {
+  description = "Dockerhub password - used to pull images and avoid hitting dockerhub API limits"
+  default     = ""
+}
+
+variable "dockerhub_password" {
+  description = "Dockerhub password - used to pull images and avoid hitting dockerhub API limits"
+  default     = ""
+}
 
 # EKS variables
 variable "eks" {

@@ -15,6 +15,9 @@ podAnnotations:
 %{ endif ~}
 
 %{ if eks ~}
+image:
+  imagePullSecrets:
+    - dockerhub-credentials 
 serviceAccount:
   server:
     create: true
