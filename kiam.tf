@@ -13,7 +13,7 @@ data "aws_iam_policy_document" "velero_assume" {
 }
 
 resource "aws_iam_role" "velero" {
-  count = var.eks ? 0 : 1
+  count              = var.eks ? 0 : 1
   name               = "velero.${var.cluster_domain_name}"
   assume_role_policy = data.aws_iam_policy_document.velero_assume.json
 }
@@ -33,7 +33,7 @@ data "aws_iam_policy_document" "velero" {
     resources = ["*"]
   }
   statement {
-    actions = [ 
+    actions = [
       "s3:GetObject",
       "s3:DeleteObject",
       "s3:PutObject",
@@ -51,7 +51,7 @@ data "aws_iam_policy_document" "velero" {
 }
 
 resource "aws_iam_role_policy" "velero" {
-  count = var.eks ? 0 : 1
+  count  = var.eks ? 0 : 1
   name   = "velero"
   role   = aws_iam_role.velero.0.id
   policy = data.aws_iam_policy_document.velero.json
