@@ -24,14 +24,14 @@ resource "helm_release" "velero" {
   namespace  = kubernetes_namespace.velero.id
   repository = "https://vmware-tanzu.github.io/helm-charts"
   chart      = "velero"
-    version    = "2.9.15"
+  version    = "2.27.3"
 
   depends_on = [
     kubernetes_namespace.velero,
     var.dependence_prometheus,
   ]
   values = [templatefile("${path.module}/templates/velero.yaml.tpl", {
-    cluster_name = terraform.workspace
+    cluster_name        = terraform.workspace
     velero_iam_role     = var.eks ? "" : aws_iam_role.velero.0.name
     eks                 = var.eks
     eks_service_account = module.iam_assumable_role_admin.this_iam_role_arn

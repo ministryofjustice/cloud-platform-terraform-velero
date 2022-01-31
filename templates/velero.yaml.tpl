@@ -2,13 +2,7 @@
 ## Configuration settings that directly affect the Velero deployment YAML.
 ##
 
-# Details of the container image to use in the Velero deployment & daemonset (if
-# enabling restic). Required.
-# image:
-#   repository: gcr.io/heptio-images/velero
-#   tag: v1.1.0
-#   pullPolicy: IfNotPresent
-
+# Information about the Kubernetes service account Velero uses.
 %{ if eks == false ~}
 podAnnotations:
   iam.amazonaws.com/role: ${velero_iam_role}
@@ -25,8 +19,14 @@ securityContext:
 %{ endif ~}
 
 initContainers:
+  - name: velero-plugin-for-csi
+    image: velero/velero-plugin-for-csi:v0.2.0
+    imagePullPolicy: IfNotPresent
+    volumeMounts:
+      - mountPath: /target
+        name: plugins
   - name: velero-plugin-for-aws
-    image: velero/velero-plugin-for-aws:v1.0.1
+    image: velero/velero-plugin-for-aws:v1.3.0
     imagePullPolicy: IfNotPresent
     volumeMounts:
       - mountPath: /target
@@ -91,12 +91,6 @@ configuration:
 rbac:
   create: true
 
-# # Information about the Kubernetes service account Velero uses.
-# serviceAccount:
-#   server:
-#     create: true
-#     name:
-
 credentials:
   useSecret: false
   existingSecret:
@@ -121,5 +115,3 @@ schedules:
       ttl: "720h"
 
 configMaps: {}
-
-
