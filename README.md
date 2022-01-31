@@ -19,18 +19,10 @@ module "velero" {
 }
 
 ```
-## Inputs
 
-_Describe what to pass the module_
-_example_:
+<!--- BEGIN_TF_DOCS --->
 
-| Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| iam_role_nodes               | Nodes IAM role ARN in order to create the KIAM/Kube2IAM | string | | yes |
-| dependence_prometheus               |  Prometheus Dependence variable  | string | | yes |
-| cluster_domain_name         | Value used for velero IAM role names                | string   |         | yes |
-| eks                         | Are we deploying in EKS or not?                                        | bool     | false   | no |
-| eks_cluster_oidc_issuer_url | The OIDC issuer URL from the cluster, it is used for IAM ServiceAccount integration | string     |  | no |
+<!--- END_TF_DOCS --->
 
 ## Reading Material
 
