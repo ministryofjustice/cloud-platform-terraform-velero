@@ -18,6 +18,14 @@ securityContext:
   fsGroup: 1337
 %{ endif ~}
 
+resources:
+  requests:
+    cpu: 500m
+    memory: 256Mi
+  limits:
+    cpu: 1000m
+    memory: 1024Mi
+
 initContainers:
   - name: velero-plugin-for-csi
     image: velero/velero-plugin-for-csi:v0.2.0
