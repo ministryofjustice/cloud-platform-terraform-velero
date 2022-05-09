@@ -1,7 +1,6 @@
 module "velero" {
   source = "../"
 
-  iam_role_nodes              = "arn:aws:iam::0123456789:role/dummy"
   cluster_domain_name         = "dummy"
   dependence_prometheus       = "dummy"
   eks                         = true

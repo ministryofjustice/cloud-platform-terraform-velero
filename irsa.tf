@@ -4,15 +4,14 @@
 module "iam_assumable_role_admin" {
   source                        = "terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc"
   version                       = "3.13.0"
-  create_role                   = var.eks ? true : false
+  create_role                   = true
   role_name                     = "velero.${var.cluster_domain_name}"
   provider_url                  = var.eks_cluster_oidc_issuer_url
-  role_policy_arns              = [var.eks && length(aws_iam_policy.velero) >= 1 ? aws_iam_policy.velero.0.arn : ""]
+  role_policy_arns              = [length(aws_iam_policy.velero) >= 1 ? aws_iam_policy.velero.arn : ""]
   oidc_fully_qualified_subjects = ["system:serviceaccount:velero:velero-server"]
 }
 
 resource "aws_iam_policy" "velero" {
-  count = var.eks ? 1 : 0
 
   name_prefix = "velero"
   description = "EKS velero policy for cluster ${var.cluster_domain_name}"
