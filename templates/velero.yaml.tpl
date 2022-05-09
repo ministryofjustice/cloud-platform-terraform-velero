@@ -3,12 +3,7 @@
 ##
 
 # Information about the Kubernetes service account Velero uses.
-%{ if eks == false ~}
-podAnnotations:
-  iam.amazonaws.com/role: ${velero_iam_role}
-%{ endif ~}
 
-%{ if eks ~}
 serviceAccount:
   server:
     create: true
@@ -16,7 +11,6 @@ serviceAccount:
       eks.amazonaws.com/role-arn: "${eks_service_account}"
 securityContext:
   fsGroup: 1337
-%{ endif ~}
 
 resources:
   requests:

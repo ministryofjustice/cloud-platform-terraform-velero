@@ -13,8 +13,6 @@ module "velero" {
   cluster_domain_name = data.terraform_remote_state.cluster.outputs.cluster_domain_name
   # This module requires Prometheus operator already deployed
   dependence_prometheus    = module.prometheus.helm_prometheus_operator_status
-  # The below variables are for EKS
-  eks                         = true
   eks_cluster_oidc_issuer_url = data.terraform_remote_state.cluster.outputs.cluster_oidc_issuer_url
 }
 
