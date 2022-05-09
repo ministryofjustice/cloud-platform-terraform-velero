@@ -8,7 +8,7 @@ variable "cluster_domain_name" {
 }
 
 variable "eks_cluster_oidc_issuer_url" {
-  description = "If EKS variable is set to true this is going to be used when we create the IAM OIDC role"
+  description = "This is going to be used when we create the IAM OIDC role"
   type        = string
   default     = ""
 }
