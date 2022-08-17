@@ -115,5 +115,7 @@ schedules:
     schedule: "0 0/3 * * *"
     template:
       ttl: "720h"
+    excludedResources:
+      - storageclasses.storage.k8s.io
 
 configMaps: {}
