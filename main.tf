@@ -1,4 +1,5 @@
 resource "kubernetes_namespace" "velero" {
+  count = var.enable_velero ? 1 : 0
   metadata {
     name = "velero"
 
@@ -19,8 +20,9 @@ resource "kubernetes_namespace" "velero" {
 }
 
 resource "helm_release" "velero" {
+  count      = var.enable_velero ? 1 : 0
   name       = "velero"
-  namespace  = kubernetes_namespace.velero.id
+  namespace  = kubernetes_namespace.velero[count.index].id
   repository = "https://vmware-tanzu.github.io/helm-charts"
   chart      = "velero"
   version    = "2.27.3"

@@ -13,3 +13,8 @@ variable "eks_cluster_oidc_issuer_url" {
   default     = ""
 }
 
+variable "enable_velero" {
+  description = "Enable or not velero Helm Chart"
+  default     = true
+  type        = bool
+}
