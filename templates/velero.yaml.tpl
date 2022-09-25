@@ -22,13 +22,13 @@ resources:
 
 initContainers:
   - name: velero-plugin-for-csi
-    image: velero/velero-plugin-for-csi:v0.2.0
+    image: velero/velero-plugin-for-csi:v0.3.0
     imagePullPolicy: IfNotPresent
     volumeMounts:
       - mountPath: /target
         name: plugins
   - name: velero-plugin-for-aws
-    image: velero/velero-plugin-for-aws:v1.3.0
+    image: velero/velero-plugin-for-aws:v1.5.0
     imagePullPolicy: IfNotPresent
     volumeMounts:
       - mountPath: /target
