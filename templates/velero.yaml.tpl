@@ -95,4 +95,10 @@ schedules:
     template:
       ttl: "720h"
 
-configMaps: {}
+configMaps:
+  restic-restore-action-config:
+    labels:
+      velero.io/plugin-config: ""
+      velero.io/restic: RestoreItemAction
+    data:
+      image: velero/velero-restic-restore-helper:v1.9.1
