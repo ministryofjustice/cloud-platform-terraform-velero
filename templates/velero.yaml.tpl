@@ -21,12 +21,6 @@ resources:
     memory: 1024Mi
 
 initContainers:
-  - name: velero-plugin-for-csi
-    image: velero/velero-plugin-for-csi:v0.3.0
-    imagePullPolicy: IfNotPresent
-    volumeMounts:
-      - mountPath: /target
-        name: plugins
   - name: velero-plugin-for-aws
     image: velero/velero-plugin-for-aws:v1.5.0
     imagePullPolicy: IfNotPresent
@@ -63,21 +57,6 @@ configuration:
     prefix: ${cluster_name}
     config:
       region: eu-west-2
-    #  s3ForcePathStyle:
-    #  s3Url:
-    #  kmsKeyId:
-    #  resourceGroup:
-    #  storageAccount:
-    #  publicUrl:
-
-  volumeSnapshotLocation:
-    name: default
-    config:
-      region: eu-west-2
-  #    apitimeout:
-  #    resourceGroup:
-  #    snapshotLocation:
-  #    project:
 
   backupSyncPeriod:
   # `velero server` default: 1h
@@ -97,9 +76,9 @@ credentials:
   useSecret: false
   existingSecret:
   secretContents:
-snapshotsEnabled: true
+snapshotsEnabled: false
 
-deployRestic: false
+deployRestic: true
 
 # Backup schedules to create.
 # Eg:
