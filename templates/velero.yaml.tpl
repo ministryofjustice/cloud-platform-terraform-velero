@@ -83,7 +83,7 @@ deployRestic: true
 restic:
   resources:
     requests:
-      cpu: 500m
+      cpu: "${restic_cpu_requests}"
       memory: 512Mi
     limits:
       cpu: 1000m

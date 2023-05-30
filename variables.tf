@@ -18,3 +18,9 @@ variable "enable_velero" {
   default     = true
   type        = bool
 }
+
+variable "restic_cpu_requests" {
+  description = "CPU requests for restic"
+  default     = "500m"
+  type        = string
+}
