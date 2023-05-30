@@ -80,6 +80,16 @@ snapshotsEnabled: false
 
 deployRestic: true
 
+restic:
+  resources:
+    requests:
+      cpu: 500m
+      memory: 512Mi
+    limits:
+      cpu: 1000m
+      memory: 1024Mi
+
+
 # Backup schedules to create.
 # Eg:
 # schedules:
