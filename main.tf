@@ -34,6 +34,7 @@ resource "helm_release" "velero" {
   values = [templatefile("${path.module}/templates/velero.yaml.tpl", {
     cluster_name        = terraform.workspace
     eks_service_account = module.iam_assumable_role_admin.this_iam_role_arn
+    restic_cpu_requests = var.restic_cpu_requests
   })]
 
   lifecycle {
