@@ -21,6 +21,6 @@ variable "enable_velero" {
 
 variable "restic_cpu_requests" {
   description = "CPU requests for restic"
-  default     = "500m"
+  default     = "500m"   # 500m is the Velero Helm defined default for Restic CPU requests
   type        = string
 }
