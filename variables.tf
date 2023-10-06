@@ -19,8 +19,8 @@ variable "enable_velero" {
   type        = bool
 }
 
-variable "restic_cpu_requests" {
-  description = "CPU requests for restic"
-  default     = "500m"   # 500m is the Velero Helm defined default for Restic CPU requests
+variable "node_agent_cpu_requests" {
+  description = "CPU requests for node-agent"
+  default     = "500m"   # 500m is the Velero Helm defined default for node-agent CPU requests
   type        = string
 }
