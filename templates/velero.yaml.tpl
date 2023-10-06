@@ -3,13 +3,14 @@
 ##
 
 # Information about the Kubernetes service account Velero uses.
-
 serviceAccount:
   server:
     create: true
     annotations: 
       eks.amazonaws.com/role-arn: "${eks_service_account}"
-securityContext:
+
+podSecurityContext:
+  runAsUser: 1000
   fsGroup: 1337
 
 resources:
@@ -22,7 +23,7 @@ resources:
 
 initContainers:
   - name: velero-plugin-for-aws
-    image: velero/velero-plugin-for-aws:v1.5.0
+    image: velero/velero-plugin-for-aws:v1.7.0
     imagePullPolicy: IfNotPresent
     volumeMounts:
       - mountPath: /target
@@ -44,13 +45,11 @@ metrics:
     additionalLabels: {}
 
 configuration:
-  provider: aws
-
   # Parameters for the `default` BackupStorageLocation. See
-  # https://velero.io/docs/v1.0.0/api-types/backupstoragelocation/
+  # https://velero.io/docs/v1.11/api-types/backupstoragelocation/
   backupStorageLocation:
-    name: default
-  
+  - name: default
+    provider: aws
     # Bucket to store backups in. Required.
     bucket: cloud-platform-velero-backups
     # Prefix within bucket under which to store backups. Optional.
@@ -60,12 +59,11 @@ configuration:
 
   backupSyncPeriod:
   # `velero server` default: 1h
-  resticTimeout:
+  fsBackupTimeout:
   # `velero server` default: namespaces,persistentvolumes,persistentvolumeclaims,secrets,configmaps,serviceaccounts,limitranges,pods
   restoreResourcePriorities:
   # `velero server` default: false
   restoreOnlyMode:
-
   # additional key/value pairs to be used as environment variables such as "AWS_CLUSTER_NAME: 'yourcluster.domain.tld'"
   extraEnvVars: {}
 
@@ -78,18 +76,17 @@ credentials:
   secretContents:
 snapshotsEnabled: false
 
-deployRestic: true
+deployNodeAgent: true
 
-restic:
+nodeAgent:
   resources:
     requests:
-      cpu: "${restic_cpu_requests}"
+      cpu: "${node_agent_cpu_requests}"
       memory: 512Mi
     limits:
       cpu: 1000m
       memory: 1024Mi
-
-
+  
 # Backup schedules to create.
 # Eg:
 # schedules:
@@ -106,9 +103,9 @@ schedules:
       ttl: "720h"
 
 configMaps:
-  restic-restore-action-config:
+  fs-restore-action-config:
     labels:
       velero.io/plugin-config: ""
-      velero.io/restic: RestoreItemAction
+      velero.io/pod-volume-restore: RestoreItemAction
     data:
-      image: velero/velero-restic-restore-helper:v1.9.1
+      image: velero/velero-restore-helper:v1.10.2

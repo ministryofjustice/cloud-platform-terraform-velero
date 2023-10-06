@@ -22,6 +22,7 @@ data "aws_iam_policy_document" "velero_irsa" {
 
   statement {
     actions = [
+      "sts:AssumeRoleWithWebIdentity",
       "sts:AssumeRole",
       "ec2:DescribeSnapshots",
       "ec2:DescribeVolumes",
