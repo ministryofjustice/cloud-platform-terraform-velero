@@ -7,6 +7,7 @@ resource "kubernetes_namespace" "velero" {
       "component"                                      = "velero"
       "cloud-platform.justice.gov.uk/environment-name" = "production"
       "cloud-platform.justice.gov.uk/is-production"    = "true"
+      "pod-security.kubernetes.io/audit"               = "privileged"
     }
 
     annotations = {
@@ -32,8 +33,8 @@ resource "helm_release" "velero" {
     var.dependence_prometheus,
   ]
   values = [templatefile("${path.module}/templates/velero.yaml.tpl", {
-    cluster_name        = terraform.workspace
-    eks_service_account = module.iam_assumable_role_admin.this_iam_role_arn
+    cluster_name            = terraform.workspace
+    eks_service_account     = module.iam_assumable_role_admin.this_iam_role_arn
     node_agent_cpu_requests = var.node_agent_cpu_requests
   })]
 
