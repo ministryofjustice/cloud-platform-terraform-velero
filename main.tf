@@ -7,7 +7,7 @@ resource "kubernetes_namespace" "velero" {
       "component"                                      = "velero"
       "cloud-platform.justice.gov.uk/environment-name" = "production"
       "cloud-platform.justice.gov.uk/is-production"    = "true"
-      "pod-security.kubernetes.io/audit"               = "privileged"
+      "pod-security.kubernetes.io/enforce"             = "privileged"
     }
 
     annotations = {
