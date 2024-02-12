@@ -13,6 +13,10 @@ podSecurityContext:
   runAsUser: 1000
   fsGroup: 1337
 
+containerSecurityContext:
+  capabilities:
+    drop: ["NET_RAW"]
+
 resources:
   requests:
     cpu: 100m
