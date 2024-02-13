@@ -113,3 +113,8 @@ configMaps:
       velero.io/pod-volume-restore: RestoreItemAction
     data:
       image: velero/velero-restore-helper:v1.10.2
+
+nodeAgent:
+  containerSecurityContext:
+    capabilities:
+      drop: ["NET_RAW"]
