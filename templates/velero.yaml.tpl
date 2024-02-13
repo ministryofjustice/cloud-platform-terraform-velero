@@ -32,6 +32,9 @@ initContainers:
     volumeMounts:
       - mountPath: /target
         name: plugins
+    securityContext:
+      capabilities:
+        drop: ["NET_RAW"]
 
 # Settings for Velero's prometheus metrics. Disabled by default.
 metrics:
