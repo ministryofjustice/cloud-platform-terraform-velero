@@ -15,7 +15,7 @@ podSecurityContext:
 
 containerSecurityContext:
   capabilities:
-    drop: ["NET_RAW"]
+    drop: ["ALL"]
 
 resources:
   requests:
@@ -34,7 +34,7 @@ initContainers:
         name: plugins
     securityContext:
       capabilities:
-        drop: ["NET_RAW"]
+        drop: ["ALL"]
 
 # Settings for Velero's prometheus metrics. Disabled by default.
 metrics:
@@ -120,4 +120,4 @@ configMaps:
 nodeAgent:
   containerSecurityContext:
     capabilities:
-      drop: ["NET_RAW"]
+      drop: ["ALL"]
