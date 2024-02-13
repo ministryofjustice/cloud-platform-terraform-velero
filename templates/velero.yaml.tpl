@@ -13,6 +13,10 @@ podSecurityContext:
   runAsUser: 1000
   fsGroup: 1337
 
+containerSecurityContext:
+  capabilities:
+    drop: ["ALL"]
+
 resources:
   requests:
     cpu: 100m
@@ -23,11 +27,14 @@ resources:
 
 initContainers:
   - name: velero-plugin-for-aws
-    image: velero/velero-plugin-for-aws:v1.7.0
+    image: velero/velero-plugin-for-aws:v1.9.0
     imagePullPolicy: IfNotPresent
     volumeMounts:
       - mountPath: /target
         name: plugins
+    securityContext:
+      capabilities:
+        drop: ["ALL"]
 
 # Settings for Velero's prometheus metrics. Disabled by default.
 metrics:
@@ -109,3 +116,8 @@ configMaps:
       velero.io/pod-volume-restore: RestoreItemAction
     data:
       image: velero/velero-restore-helper:v1.10.2
+
+nodeAgent:
+  containerSecurityContext:
+    capabilities:
+      drop: ["ALL"]
