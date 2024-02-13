@@ -14,8 +14,12 @@ podSecurityContext:
   fsGroup: 1337
 
 containerSecurityContext:
+  allowPrivilegeEscalation: false
+  runAsNonRoot: false
+  seccompProfile:
+    type: RuntimeDefault
   capabilities:
-    drop: ["ALL"]
+    drop: [ "ALL" ]
 
 resources:
   requests:
@@ -33,8 +37,12 @@ initContainers:
       - mountPath: /target
         name: plugins
     securityContext:
+      allowPrivilegeEscalation: false
+      runAsNonRoot: false
+      seccompProfile:
+        type: RuntimeDefault
       capabilities:
-        drop: ["ALL"]
+        drop: [ "ALL" ]
 
 # Settings for Velero's prometheus metrics. Disabled by default.
 metrics:
@@ -118,6 +126,14 @@ configMaps:
       image: velero/velero-restore-helper:v1.10.2
 
 nodeAgent:
+  podSecurityContext:
+    runAsUser: 1000
+    fsGroup: 1337
+
   containerSecurityContext:
+    allowPrivilegeEscalation: false
+    runAsNonRoot: false
+    seccompProfile:
+      type: RuntimeDefault
     capabilities:
-      drop: ["ALL"]
+      drop: [ "ALL" ]
