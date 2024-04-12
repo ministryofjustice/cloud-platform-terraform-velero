@@ -137,3 +137,7 @@ nodeAgent:
       type: RuntimeDefault
     capabilities:
       drop: [ "ALL" ]
+      
+  priorityClassName: system-cluster-critical
+
+priorityClassName: system-cluster-critical
