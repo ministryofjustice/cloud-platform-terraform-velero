@@ -1,8 +1,4 @@
 
-variable "dependence_prometheus" {
-  description = "Prometheus module - Prometheus Operator dependences in order to be executed."
-}
-
 variable "cluster_domain_name" {
   description = "The cluster domain used for iam_assumable_role_admin role name"
 }
