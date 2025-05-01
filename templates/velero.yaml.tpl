@@ -71,6 +71,10 @@ configuration:
     prefix: ${cluster_name}
     config:
       region: eu-west-2
+      # Tags that need to be placed on AWS S3 objects. 
+      # For example "Key1=Value1&Key2=Value2"
+      # Optional (defaults to empty "")
+      tagging: "business-unit=platforms"
 
   backupSyncPeriod:
   # `velero server` default: 1h
@@ -113,6 +117,8 @@ nodeAgent:
 #        - foo
 schedules:
   allnamespacebackup:
+    labels:
+      business-unit: platforms
     schedule: "0 0/3 * * *"
     template:
       ttl: "720h"
