@@ -74,7 +74,7 @@ configuration:
       # Tags that need to be placed on AWS S3 objects. 
       # For example "Key1=Value1&Key2=Value2"
       # Optional (defaults to empty "")
-      tagging: "business-unit=platforms"
+      tagging: "business-unit=platforms&service-area=hosting"
 
   backupSyncPeriod:
   # `velero server` default: 1h
@@ -119,6 +119,7 @@ schedules:
   allnamespacebackup:
     labels:
       business-unit: platforms
+      service-area: hosting
     schedule: "0 0/3 * * *"
     template:
       ttl: "720h"
