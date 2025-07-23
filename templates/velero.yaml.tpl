@@ -26,7 +26,7 @@ resources:
     cpu: 100m
     memory: 128Mi
   limits:
-    cpu: 500m
+    cpu: 2000m
     memory: 2048Mi
 
 initContainers:
