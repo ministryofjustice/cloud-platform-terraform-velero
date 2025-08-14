@@ -27,7 +27,7 @@ resources:
     memory: 128Mi
   limits:
     cpu: 2000m
-    memory: 2048Mi
+    memory: 3072Mi
 
 initContainers:
   - name: velero-plugin-for-aws
