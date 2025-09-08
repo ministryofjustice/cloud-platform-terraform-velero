@@ -84,7 +84,7 @@ configuration:
   # `velero server` default: false
   restoreOnlyMode:
   # additional key/value pairs to be used as environment variables such as "AWS_CLUSTER_NAME: 'yourcluster.domain.tld'"
-  extraEnvVars: {}
+  extraEnvVars: []
 
 rbac:
   create: true
