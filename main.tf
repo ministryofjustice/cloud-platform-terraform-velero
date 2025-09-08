@@ -26,7 +26,7 @@ resource "helm_release" "velero" {
   namespace  = kubernetes_namespace.velero[count.index].id
   repository = "https://vmware-tanzu.github.io/helm-charts"
   chart      = "velero"
-  version    = "8.1.0"
+  version    = "10.1.1"
 
   depends_on = [
     kubernetes_namespace.velero,
