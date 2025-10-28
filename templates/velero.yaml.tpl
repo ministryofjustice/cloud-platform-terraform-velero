@@ -24,10 +24,10 @@ containerSecurityContext:
 resources:
   requests:
     cpu: 100m
-    memory: 128Mi
+    memory: 256Mi
   limits:
     cpu: 2000m
-    memory: 3072Mi
+    memory: 6144Mi
 
 initContainers:
   - name: velero-plugin-for-aws
