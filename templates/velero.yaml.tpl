@@ -123,6 +123,8 @@ schedules:
     schedule: "0 0/3 * * *"
     template:
       ttl: "720h"
+      excludedNamespaces:
+        - ingress-controllers
 
 configMaps:
   fs-restore-action-config:
