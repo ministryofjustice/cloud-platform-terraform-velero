@@ -31,7 +31,7 @@ resources:
 
 initContainers:
   - name: velero-plugin-for-aws
-    image: velero/velero-plugin-for-aws:v1.9.0
+    image: velero/velero-plugin-for-aws:v1.14.4
     imagePullPolicy: IfNotPresent
     volumeMounts:
       - mountPath: /target
@@ -132,7 +132,7 @@ configMaps:
       velero.io/plugin-config: ""
       velero.io/pod-volume-restore: RestoreItemAction
     data:
-      image: velero/velero-restore-helper:v1.10.2
+      image: velero/velero:v1.18.2
 
 nodeAgent:
   podSecurityContext:
